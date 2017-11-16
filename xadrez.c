@@ -7,10 +7,11 @@
 #define PRETO 0
 #define LARGURATABULEIRO 8
 #define COMPRIMENTOTABULEIRO 8
+#define TAMANHOJOGADA 7
 
 typedef struct{
     int x, y;
-    int foraDoJogo; //booleana
+    int foraDoJogo;
 }Peca;
 
 typedef struct{
@@ -613,7 +614,7 @@ int verificaMovimentoCavalo(int jogador, int Xinicial, int Yinicial, int Xfinal,
     return 0;
 }
 
-int coordenadasValidas(char jogada[7], int jogadorAtual, char tabuleiro[][LARGURATABULEIRO]){
+int coordenadasValidas(char jogada[TAMANHOJOGADA], int jogadorAtual, char tabuleiro[][LARGURATABULEIRO]){
     char peca = jogada[0];
 
     int Yinicial = jogada[1] - 'a';
@@ -689,7 +690,7 @@ int coordenadasValidas(char jogada[7], int jogadorAtual, char tabuleiro[][LARGUR
     return 1;
 }
 
-int movimentoValido(int jogadorAtual, char jogada[7], char tabuleiro[][LARGURATABULEIRO]){
+int movimentoValido(int jogadorAtual, char jogada[TAMANHOJOGADA], char tabuleiro[][LARGURATABULEIRO]){
     if(!pecaEhValida(jogada[0], jogadorAtual)) return 0;
     printf("deu pau aqui\n");
     if(!coordenadasValidas(jogada, jogadorAtual, tabuleiro)) return 0;
@@ -988,7 +989,7 @@ int provavelXeque(int jogadorAtual, int x, int y, char tabuleiro[][LARGURATABULE
     return 0;
 }
 
-void processaJogada(int jogadorAtual, char jogada[7], char tabuleiro[][LARGURATABULEIRO], int *xeque, Jogador *preto, Jogador *branco){
+void processaJogada(int jogadorAtual, char jogada[TAMANHOJOGADA], char tabuleiro[][LARGURATABULEIRO], int *xeque, Jogador *preto, Jogador *branco){
     char peca = jogada[0];
 
     int Yinicial = jogada[1] - 'a';
@@ -1116,7 +1117,7 @@ int main(){
                     mostrarMensagemJogadaBranco();
                     qtdJogadasBranco++;
                     jogadasBranco = (char **) realloc(jogadasBranco, (qtdJogadasBranco)*sizeof(char *));
-                    jogadasBranco[qtdJogadasBranco - 1] = (char *) malloc(7);
+                    jogadasBranco[qtdJogadasBranco - 1] = (char *) malloc(TAMANHOJOGADA);
 
                     scanf(" %s", jogadasBranco[qtdJogadasBranco - 1]);
 
@@ -1131,7 +1132,7 @@ int main(){
                     mostrarMensagemJogadaPreto();
                     qtdJogadasPreto++;
                     jogadasPreto = (char **) realloc(jogadasPreto, (qtdJogadasPreto)*sizeof(char *));
-                    jogadasPreto[qtdJogadasPreto - 1] = (char *) malloc(7);
+                    jogadasPreto[qtdJogadasPreto - 1] = (char *) malloc(TAMANHOJOGADA);
 
                     scanf(" %s", jogadasPreto[qtdJogadasPreto - 1]);
 
